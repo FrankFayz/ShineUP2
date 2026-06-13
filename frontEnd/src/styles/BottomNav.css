@@ -1,0 +1,303 @@
+/* ============================================
+   BOTTOM NAVIGATION - TIKTOK STYLE
+   ============================================ */
+
+.bottom-nav-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+  border-top: 2px solid #ff6b35;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: clamp(0.3rem, 0.6vw, 0.6rem);
+  padding: clamp(0.4rem, 0.8vw, 0.7rem) clamp(0.3rem, 0.6vw, 0.5rem);
+  z-index: 50;
+}
+
+/* HIDE ON DESKTOP - Web Application */
+@media (min-width: 769px) {
+  .bottom-nav-container {
+    display: none !important;
+  }
+}
+
+/* Navigation Button Base */
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.15rem, 0.3vw, 0.25rem);
+  background: transparent;
+  border: 1.5px solid #ffb347;
+  color: #ffb347;
+  cursor: pointer;
+  padding: clamp(0.25rem, 0.5vw, 0.4rem);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+  will-change: transform, color, background;
+  position: relative;
+  flex: 1;
+  max-width: 60px;
+  min-height: 42px;
+  font-weight: 600;
+}
+
+/* Navigation Icon */
+.nav-icon {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+/* Navigation Label */
+.nav-label {
+  font-size: clamp(0.55rem, 0.9vw, 0.65rem);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+/* Hover State - All Buttons */
+.nav-btn:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 179, 71, 0.15);
+  border-color: #ffc857;
+  color: #ffc857;
+}
+
+.nav-btn:hover .nav-icon {
+  transform: scale(1.2);
+}
+
+/* Active State */
+.nav-btn.active {
+  background: rgba(255, 179, 71, 0.2);
+  transform: scale(1.05);
+  border-color: #ffc857;
+  color: #ffc857;
+}
+
+.nav-btn.active .nav-icon {
+  transform: scale(1.3);
+}
+
+.nav-btn.active .nav-label {
+  font-weight: 800;
+  opacity: 1;
+}
+
+/* Active Indicator Dot */
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(4px, 0.8vw, 8px);
+  height: clamp(4px, 0.8vw, 8px);
+  background: #ffb347;
+  border-radius: 50%;
+}
+
+/* Home Button - Bright Cyan */
+.nav-home {
+  color: #00d4ff;
+  border-color: #00d4ff;
+}
+
+.nav-home:hover {
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+}
+
+.nav-home.active {
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.2);
+  border-color: #00f0ff;
+}
+
+/* Messages Button - Bright Magenta */
+.nav-messages {
+  color: #ff00ff;
+  border-color: #ff00ff;
+}
+
+.nav-messages:hover {
+  color: #ff1493;
+  background: rgba(255, 20, 147, 0.15);
+  border-color: #ff1493;
+}
+
+.nav-messages.active {
+  color: #ff1493;
+  background: rgba(255, 20, 147, 0.2);
+  border-color: #ff1493;
+}
+
+/* Upload Button - Professional Gold */
+.nav-upload {
+  color: #ffb347;
+  border-color: #ffb347;
+  background: transparent;
+  transform: scale(1.05);
+}
+
+.nav-upload .nav-icon {
+  font-weight: 800;
+}
+
+.nav-upload:hover {
+  background: rgba(255, 179, 71, 0.15);
+  color: #ffc857;
+  border-color: #ffc857;
+  transform: scale(1.12) translateY(-3px);
+}
+
+.nav-upload:hover .nav-icon {
+  transform: scale(1.3);
+}
+
+.nav-upload.active {
+  background: rgba(255, 179, 71, 0.2);
+  transform: scale(1.08);
+  color: #ffc857;
+  border-color: #ffc857;
+}
+
+.nav-upload.active .nav-icon {
+  transform: scale(1.35);
+}
+
+.nav-upload:active {
+  transform: scale(0.98);
+}
+
+/* Profile Button - Bright Green */
+.nav-profile {
+  color: #00ff88;
+  border-color: #00ff88;
+}
+
+.nav-profile:hover {
+  color: #00ff99;
+  background: rgba(0, 255, 153, 0.15);
+  border-color: #00ff99;
+}
+
+.nav-profile.active {
+  color: #00ff99;
+  background: rgba(0, 255, 153, 0.2);
+  border-color: #00ff99;
+}
+
+/* Active Press State */
+.nav-home:active,
+.nav-messages:active,
+.nav-profile:active {
+  transform: scale(0.93);
+}
+
+/* Ripple Effect on Click */
+.nav-btn::before {
+  display: none;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .bottom-nav-container {
+    padding: clamp(0.4rem, 0.8vw, 0.6rem) clamp(0.25rem, 0.5vw, 0.4rem);
+    gap: clamp(0.2rem, 0.5vw, 0.5rem);
+  }
+
+  .nav-btn {
+    max-width: 55px;
+    min-height: 40px;
+    padding: clamp(0.2rem, 0.4vw, 0.35rem);
+  }
+
+  .nav-label {
+    font-size: clamp(0.52rem, 0.85vw, 0.62rem);
+  }
+
+  .nav-icon {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .bottom-nav-container {
+    padding: 0.35rem 0.25rem;
+    gap: 0.15rem;
+  }
+
+  .nav-btn {
+    max-width: 50px;
+    min-height: 38px;
+    padding: 0.2rem;
+  }
+
+  .nav-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.15px;
+  }
+
+  .nav-icon {
+    font-size: 0.85rem;
+  }
+
+  .nav-upload {
+    transform: scale(1.02);
+  }
+
+  .nav-upload:hover {
+    transform: scale(1.06) translateY(-2px);
+  }
+}
+
+/* Prevent Mobile Scroll Issue */
+@supports (padding: max(0px)) {
+  .bottom-nav-container {
+    padding-bottom: max(clamp(0.6rem, 1.5vw, 1rem), env(safe-area-inset-bottom));
+  }
+}
+
+/* Loading State */
+.nav-btn.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.nav-btn.loading .nav-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .nav-btn,
+  .nav-icon,
+  .nav-label,
+  .nav-btn::before {
+    transition: none;
+    animation: none;
+  }
+}

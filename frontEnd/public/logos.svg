@@ -1,0 +1,72 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Premium gradients -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFC700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB700;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2d1f4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f3a;stop-opacity:1" />
+    </linearGradient>
+
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFC700;stop-opacity:0" />
+    </radialGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle with gradient -->
+  <circle cx="150" cy="150" r="145" fill="url(#bgGradient)"/>
+  
+  <!-- Outer glow circle -->
+  <circle cx="150" cy="150" r="140" fill="url(#glowGradient)" opacity="0.6"/>
+
+  <!-- Inner shine circle with gradient border -->
+  <circle cx="150" cy="150" r="135" fill="none" stroke="url(#goldGradient)" stroke-width="2" opacity="0.8"/>
+
+  <!-- Star icon with professional design -->
+  <g transform="translate(150, 100)">
+    <!-- Outer star shape (5-pointed) -->
+    <path d="M 0,-50 L 12,-16 L 50,-16 L 20,10 L 32,44 L 0,18 L -32,44 L -20,10 L -50,-16 L -12,-16 Z" 
+          fill="url(#goldGradient)" filter="url(#shadow)" opacity="0.95"/>
+    
+    <!-- Inner star shine -->
+    <path d="M 0,-45 L 10,-15 L 45,-15 L 18,8 L 28,40 L 0,16 L -28,40 L -18,8 L -45,-15 L -10,-15 Z" 
+          fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- "SHINE" text -->
+  <text x="150" y="185" font-family="'Montserrat', Arial, sans-serif" font-size="32" font-weight="900" 
+        text-anchor="middle" fill="url(#goldGradient)" letter-spacing="3">
+    SHINE
+  </text>
+
+  <!-- "UP" text with emphasis -->
+  <text x="150" y="225" font-family="'Montserrat', Arial, sans-serif" font-size="28" font-weight="900" 
+        text-anchor="middle" fill="#FFFFFF" letter-spacing="4" opacity="0.95">
+    UP
+  </text>
+
+  <!-- Decorative accent lines -->
+  <line x1="80" y1="240" x2="120" y2="240" stroke="url(#goldGradient)" stroke-width="2" opacity="0.6"/>
+  <line x1="180" y1="240" x2="220" y2="240" stroke="url(#goldGradient)" stroke-width="2" opacity="0.6"/>
+
+  <!-- Professional border -->
+  <circle cx="150" cy="150" r="145" fill="none" stroke="url(#goldGradient)" stroke-width="1.5" opacity="0.5"/>
+</svg>

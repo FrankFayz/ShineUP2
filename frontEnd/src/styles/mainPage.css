@@ -1,0 +1,961 @@
+/* ============================================
+   MAIN PAGE RESPONSIVE STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+/* ==================== BACKGROUND ==================== */
+.background-shift {
+  animation: backgroundShift 20s ease-in-out infinite alternate;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+@keyframes backgroundShift {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05) rotate(0.5deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.1) rotate(1deg);
+    opacity: 1;
+  }
+}
+
+/* ==================== MAIN PAGE CONTAINER ==================== */
+.main-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  background: #000;
+  overflow: hidden;
+  padding-bottom: clamp(45px, 12vw, 65px);
+}
+
+.main-page.tiktok-style {
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  padding-bottom: clamp(45px, 12vw, 65px);
+}
+
+/* Desktop - No bottom padding needed since bottom nav is hidden */
+@media (min-width: 769px) {
+  .main-page {
+    padding-bottom: 0;
+  }
+
+  .main-page.tiktok-style {
+    padding-bottom: 0;
+  }
+}
+
+/* ==================== RESPONSIVE HEADER HEIGHT ==================== */
+:root {
+  --header-height: 56px; /* Desktop */
+  --content-height: calc(100vh - 56px);
+  --safe-area-top: max(0px, env(safe-area-inset-top));
+  --safe-area-bottom: max(0px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 54px;
+    --content-height: calc(100vh - 54px);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 50px;
+    --content-height: calc(100vh - 50px);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 46px;
+    --content-height: calc(100vh - 46px);
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --header-height: 44px;
+    --content-height: calc(100vh - 44px);
+  }
+}
+
+/* ==================== CONTENT CONTAINER ==================== */
+.content-container {
+  height: var(--content-height);
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ==================== VIDEO FEED CONTAINER ==================== */
+.video-feed-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  background: #000;
+  overflow: hidden;
+}
+
+/* ==================== VIDEO SECTION TRANSITIONS ==================== */
+.video-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.35, 0, 0.65, 1);
+  will-change: transform;
+}
+
+.video-section.active {
+  transform: translateY(0);
+  z-index: 10;
+  opacity: 1;
+}
+
+.video-section.inactive {
+  transform: translateY(100%);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==================== VIDEO CONTENT WRAPPER ==================== */
+.video-content-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 0;
+  position: relative;
+}
+
+/* Desktop Layout: 3/4 video, 1/4 sidebar */
+.video-player-section {
+  flex: 3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 75%;
+  overflow: hidden;
+  background: #000;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Increase video width on desktop for better viewing */
+@media (min-width: 1200px) {
+  .video-player-section {
+    width: 80%;
+  }
+  
+  .video-info-sidebar {
+    width: 20%;
+  }
+}
+
+.video-info-sidebar {
+  flex: 1;
+  width: 25%;
+  background: #0f0f0f;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+}
+
+.video-info-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.video-info-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 107, 0.3);
+  border-radius: 3px;
+}
+
+/* Mobile Video Info - TikTok style bottom sheet */
+.mobile-video-info {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  z-index: 20;
+  pointer-events: auto;
+  backdrop-filter: blur(3px);
+  transition: max-height 0.35s cubic-bezier(0.23, 1, 0.32, 1), bottom 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  max-height: 12vh;
+  border-top: 2.5px solid #FF6B6B;
+}
+
+/* Expanded state for mobile video info */
+.mobile-video-info.expanded {
+  max-height: 68vh;
+  overflow-y: auto;
+}
+
+/* Collapsed state (default) */
+.mobile-video-info.collapsed {
+  max-height: 12vh;
+}
+
+/* Drag handle for bottom sheet */
+.video-info-drag-handle {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: clamp(2px, 0.3vw, 3px) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 21;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  transition: background 0.2s ease;
+}
+
+.video-info-drag-handle:active {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Visual drag indicator */
+.drag-indicator {
+  width: clamp(32px, 6vw, 44px);
+  height: clamp(3px, 0.5vw, 4px);
+  background: #ff6b35;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.video-info-drag-handle:active .drag-indicator {
+  width: 50px;
+  background: #ffb347;
+}
+
+/* Ensure text is always readable on mobile overlay */
+.mobile-video-info h3,
+.mobile-video-info h4,
+.mobile-video-info h5,
+.mobile-video-info p,
+.mobile-video-info span {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ==================== SCROLL INDICATOR ==================== */
+.scroll-indicator {
+  position: absolute;
+  bottom: max(30px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  opacity: 0.7;
+  animation: bounce 2s infinite;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0 1rem;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-4px);
+  }
+}
+
+/* ==================== UPLOAD MODAL ==================== */
+.upload-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.upload-modal {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  border-radius: 18px;
+  text-align: center;
+  width: min(92vw, 440px);
+  min-width: 0;
+  max-width: 440px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.upload-modal h3 {
+  color: #ffffff;
+  font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 0.85rem 0 0.35rem;
+}
+
+.upload-status-icon {
+  width: clamp(64px, 18vw, 82px);
+  height: clamp(64px, 18vw, 82px);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #22c55e, #14b8a6);
+  color: #ffffff;
+  font-size: clamp(1.4rem, 7vw, 2rem);
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 16px 34px rgba(20, 184, 166, 0.28);
+}
+
+.upload-status-icon svg {
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.upload-status-copy {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: clamp(0.9rem, 2.5vw, 0.98rem);
+  line-height: 1.55;
+  margin: 0 auto;
+  max-width: 34ch;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.upload-progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.upload-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #14b8a6, #22c55e);
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+.cancel-upload-btn,
+.close-upload-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ff5555);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  min-height: 44px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  touch-action: manipulation;
+}
+
+.cancel-upload-btn:active,
+.close-upload-btn:active {
+  transform: scale(0.95);
+}
+
+/* Button group for Cancel and Finish buttons */
+.upload-button-group {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.65rem, 2vw, 0.85rem);
+  margin-top: clamp(1.25rem, 4vw, 1.75rem);
+  flex-wrap: wrap;
+}
+
+.upload-decision-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: stretch;
+  width: 100%;
+}
+
+.upload-action-btn {
+  min-width: 0;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem clamp(0.85rem, 3vw, 1.1rem);
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2.7vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+  touch-action: manipulation;
+}
+
+.upload-action-btn svg {
+  flex: 0 0 auto;
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.upload-action-btn--cancel {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.upload-action-btn--finish {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #ffffff;
+  box-shadow: 0 14px 28px rgba(34, 197, 94, 0.28);
+}
+
+.upload-action-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.upload-action-btn--cancel:not(:disabled):hover {
+  border-color: rgba(248, 250, 252, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 24px rgba(15, 23, 42, 0.24);
+}
+
+.upload-action-btn--finish:not(:disabled):hover {
+  box-shadow: 0 16px 34px rgba(34, 197, 94, 0.34);
+}
+
+.upload-action-btn:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+.upload-action-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+  box-shadow: none;
+  filter: grayscale(0.25);
+}
+
+.upload-success {
+  color: #4caf50;
+  margin: 1.5rem 0;
+  font-weight: 600;
+}
+
+.upload-success span {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  font-size: 1.35rem;
+}
+
+.upload-success span svg {
+  width: 1em;
+  height: 1em;
+}
+
+.upload-success p,
+.upload-percent {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(0.9rem, 2.5vw, 0.98rem);
+}
+
+/* ==================== NO RESULTS ==================== */
+.no-results {
+  text-align: center;
+  color: white;
+  padding: clamp(2rem, 10vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.no-results p {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: 1rem;
+}
+
+.upload-cta-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ffb347);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  min-height: 44px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  touch-action: manipulation;
+}
+
+.upload-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+}
+
+.upload-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* ==================== TABLET RESPONSIVE (1024px and below) ==================== */
+@media (max-width: 1024px) {
+  .video-player-section {
+    flex: 2;
+    width: 66.666%;
+  }
+
+  .video-info-sidebar {
+    flex: 1;
+    width: 33.334%;
+  }
+}
+
+/* ==================== MOBILE RESPONSIVE (768px and below) ==================== */
+@media (max-width: 768px) {
+  .video-content-wrapper {
+    flex-direction: column;
+  }
+
+  .video-player-section {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Hide desktop sidebar on mobile */
+  .video-info-sidebar {
+    display: none;
+    flex: 0;
+    width: 0;
+  }
+
+  /* Show mobile video info as bottom sheet */
+  .mobile-video-info {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 18vh;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .mobile-video-info.expanded {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+}
+
+/* ==================== SMALL MOBILE (480px and below) ==================== */
+@media (max-width: 480px) {
+  .mobile-video-info {
+    max-height: 15vh;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .mobile-video-info.expanded {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .upload-modal {
+    width: min(94vw, 440px);
+    min-width: 0;
+    padding: 1.4rem 1rem;
+    border-radius: 16px;
+  }
+
+  .upload-decision-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-action-btn {
+    min-height: 50px;
+  }
+
+  .scroll-indicator {
+    font-size: 0.75rem;
+    bottom: 20px;
+  }
+
+  .no-results {
+    padding: 2rem 1rem;
+  }
+
+  .no-results h3 {
+    font-size: 1.2rem;
+  }
+
+  .no-results p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==================== EXTRA SMALL MOBILE (360px and below) ==================== */
+@media (max-width: 360px) {
+  .mobile-video-info {
+    max-height: 14vh;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .mobile-video-info.expanded {
+    max-height: 58vh;
+    overflow-y: auto;
+  }
+
+  .upload-modal {
+    width: 96vw;
+    min-width: 0;
+    padding: 1.2rem 0.8rem;
+    border-radius: 14px;
+  }
+
+  .upload-action-btn {
+    min-height: 48px;
+    border-radius: 10px;
+  }
+
+  .no-results {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .no-results h3 {
+    font-size: 1rem;
+  }
+
+  .no-results p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .background-shift,
+  .scroll-indicator {
+    animation: none;
+  }
+}
+/* Upload Form Modal Styles */
+.upload-form-modal {
+  background: white;
+  padding: clamp(16px, 4vw, 28px);
+  border-radius: 12px;
+  text-align: left;
+  min-width: 95vw;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 95vw;
+}
+
+.upload-form-modal h3 {
+  text-align: center;
+  margin-bottom: clamp(12px, 3vw, 16px);
+  color: #333;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+}
+
+.form-group {
+  margin-bottom: clamp(12px, 2.5vw, 16px);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: clamp(4px, 1vw, 6px);
+  font-weight: 600;
+  color: #333;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: clamp(8px, 2vw, 11px) clamp(10px, 2.5vw, 12px);
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  color: #000;
+  background: #fff;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff6b6b;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: clamp(60px, 20vh, 100px);
+  max-height: 150px;
+}
+
+.topics-section label {
+  display: block;
+  margin-bottom: clamp(10px, 2.5vw, 12px);
+  font-weight: 600;
+  color: #333;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.topic-input-group {
+  display: flex;
+  gap: clamp(6px, 1.5vw, 8px);
+  margin-bottom: clamp(8px, 1.5vw, 10px);
+  align-items: center;
+}
+
+.topic-input-group input {
+  flex: 1;
+  padding: clamp(6px, 1.5vw, 9px) clamp(8px, 2vw, 10px);
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  color: #000;
+  background: #fff;
+}
+
+.topic-input-group input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.remove-topic-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: clamp(6px, 1vw, 8px) clamp(10px, 2vw, 12px);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.remove-topic-btn:hover {
+  background: #ff5252;
+  transform: scale(1.05);
+}
+
+.add-topic-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2.5vw, 15px);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  margin-top: clamp(8px, 1.5vw, 10px);
+  transition: all 0.2s ease;
+}
+
+.add-topic-btn:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(10px, 2vw, 12px);
+  margin-top: clamp(16px, 4vw, 20px);
+  padding-top: clamp(12px, 3vw, 16px);
+  border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: clamp(10px, 2vw, 12px) clamp(18px, 4vw, 22px);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+.upload-submit-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ffb347);
+  color: white;
+  border: none;
+  padding: clamp(10px, 2vw, 12px) clamp(18px, 4vw, 22px);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.35, 0, 0.65, 1);
+}
+
+.upload-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.45);
+}
+
+.upload-submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Responsive design for upload form */
+@media (max-width: 767px) {
+  .upload-form-modal {
+    min-width: 95vw;
+    width: 95vw;
+    max-width: 95vw;
+    padding: clamp(14px, 3vw, 20px);
+    margin: clamp(10px, 3vh, 15px) auto;
+    border-radius: 10px;
+  }
+
+  .topic-input-group {
+    flex-direction: column;
+    gap: clamp(6px, 1.5vw, 8px);
+  }
+
+  .remove-topic-btn {
+    align-self: flex-end;
+    width: auto;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: clamp(8px, 1.5vw, 10px);
+  }
+
+  .cancel-btn,
+  .upload-submit-btn {
+    width: 100%;
+  }
+}
+
+/* Extra compact for tiny phones (< 360px) */
+@media (max-width: 359px) {
+  .upload-form-modal {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .upload-form-modal h3 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .form-group textarea {
+    min-height: 50px;
+  }
+}

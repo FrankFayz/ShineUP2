@@ -1,0 +1,260 @@
+/* ============================================
+   SEARCH BAR RESPONSIVE STYLES
+   ============================================ */
+
+.search-bar-container {
+  width: 100%;
+  padding: 0;
+  margin-bottom: clamp(0.5rem, 2vh, 1.2rem);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0;
+}
+
+.search-input-group {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  padding: clamp(0.4rem, 1.2vw, 0.65rem) clamp(0.6rem, 1.8vw, 1rem);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.35, 0, 0.65, 1);
+  backdrop-filter: blur(15px);
+  width: clamp(200px, 90vw, 600px);
+  max-width: 600px;
+  touch-action: manipulation;
+}
+
+.search-input-group:focus-within {
+  border-color: #ffb347;
+  box-shadow: 0 0 0 2px rgba(255, 179, 71, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.search-icon {
+  color: rgba(255, 255, 255, 0.8);
+  margin-right: clamp(0.4rem, 1.2vw, 0.6rem);
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  padding: clamp(0.4rem, 1.2vw, 0.65rem) 0;
+  color: white;
+  font-size: clamp(0.78rem, 1.3vw, 0.92rem);
+  outline: none;
+  width: 100%;
+  min-width: 0;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:-webkit-autofill,
+.search-input:-webkit-autofill:hover,
+.search-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.15) inset;
+  -webkit-text-fill-color: white;
+}
+
+.voice-search {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: clamp(0.25rem, 0.8vw, 0.4rem);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  margin-left: clamp(0.25rem, 0.8vw, 0.4rem);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  touch-action: manipulation;
+  will-change: background, color;
+}
+
+.voice-search:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffb347;
+}
+
+.voice-search:active {
+  opacity: 0.8;
+}
+
+/* ==================== RESPONSIVE MEDIA QUERIES ==================== */
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .search-form {
+    gap: 0;
+  }
+
+  .search-input-group {
+    width: clamp(320px, 70vw, 600px);
+    max-width: 600px;
+    padding: 0.65rem 1.1rem;
+  }
+
+  .search-input {
+    font-size: 0.92rem;
+  }
+}
+
+/* Tablet (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .search-form {
+    gap: 0;
+  }
+
+  .search-input-group {
+    width: clamp(260px, 75vw, 520px);
+    max-width: 520px;
+    padding: 0.55rem 0.9rem;
+  }
+
+  .search-input {
+    font-size: 0.88rem;
+  }
+}
+
+/* Mobile Horizontal (640px to 767px) */
+@media (min-width: 641px) and (max-width: 767px) {
+  .search-form {
+    gap: 0;
+    width: 100%;
+  }
+
+  .search-input-group {
+    width: clamp(200px, 85vw, 500px);
+    padding: 0.48rem 0.75rem;
+  }
+
+  .search-input {
+    font-size: 0.83rem;
+  }
+
+  .search-icon {
+    margin-right: 0.48rem;
+    font-size: 0.88rem;
+  }
+
+  .voice-search {
+    font-size: 0.88rem;
+    padding: 0.32rem;
+    min-width: 28px;
+    min-height: 28px;
+  }
+}
+
+/* Mobile Vertical (481px to 640px) */
+@media (max-width: 640px) {
+  .search-form {
+    width: 100%;
+    gap: 0;
+  }
+
+  .search-input-group {
+    width: clamp(150px, 90vw, 480px);
+    padding: 0.32rem 0.55rem;
+  }
+
+  .search-input {
+    font-size: 0.8rem;
+    padding: 0.18rem 0;
+  }
+
+  .search-icon {
+    font-size: 0.78rem;
+    margin-right: 0.32rem;
+  }
+
+  .voice-search {
+    font-size: 0.78rem;
+    padding: 0.18rem;
+    min-width: 28px;
+    min-height: 28px;
+  }
+}
+
+/* Small Mobile (361px to 480px) */
+@media (max-width: 480px) {
+  .search-form {
+    gap: 0;
+  }
+
+  .search-input-group {
+    width: clamp(120px, 92vw, 420px);
+    padding: 0.2rem 0.4rem;
+  }
+
+  .search-input {
+    font-size: 0.68rem;
+    padding: 0.1rem 0;
+  }
+
+  .search-icon {
+    font-size: 0.7rem;
+    margin-right: 0.25rem;
+  }
+
+  .voice-search {
+    font-size: 0.68rem;
+    padding: 0.1rem;
+    min-width: 24px;
+    min-height: 24px;
+  }
+}
+
+/* Extra Small Mobile (360px and below) - Samsung Galaxy 360x640 */
+@media (max-width: 360px) {
+  .search-form {
+    gap: 0;
+  }
+
+  .search-input-group {
+    width: clamp(100px, 94vw, 350px);
+    padding: 0.15rem 0.3rem;
+  }
+
+  .search-input {
+    font-size: 0.62rem;
+    padding: 0.06rem 0;
+  }
+
+  .search-icon {
+    font-size: 0.62rem;
+    margin-right: 0.15rem;
+  }
+
+  .voice-search {
+    font-size: 0.62rem;
+    padding: 0.06rem;
+    min-width: 20px;
+    min-height: 20px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .search-input,
+  .voice-search,
+  .search-input-group {
+    transition: none;
+  }
+}

@@ -1,0 +1,277 @@
+/* ============================================
+   RESPONSIVE BASE STYLES FOR ALL DEVICES
+   ============================================ */
+
+/* Root Variables with Responsive Values */
+:root {
+  /* Typography */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000;
+
+  /* Font Smoothing */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Responsive Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+
+  /* Touch Friendly Sizes */
+  --touch-target-min: 44px;
+  --button-padding: 0.6em 1.2em;
+  --border-radius: 8px;
+
+  /* Colors */
+  --primary-gradient: linear-gradient(135deg, #ff6b6b, #ffb347, #ffcc33);
+  --text-light: rgba(255, 255, 255, 0.87);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --bg-dark: #0f0f0f;
+  --bg-darker: #000;
+}
+
+/* Responsive Font Sizes for Mobile */
+@media (max-width: 640px) {
+  :root {
+    --font-size-base: 0.95rem;
+    --font-size-lg: 1.05rem;
+    --font-size-xl: 1.15rem;
+    --font-size-2xl: 1.4rem;
+  }
+}
+
+/* Universal Box Sizing */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HTML & Body - Fully Responsive */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  overflow-x: hidden;
+  background: #000;
+  color: var(--text-light);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Root Container */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+/* Headings - Responsive */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 5vw, 3.2rem);
+}
+
+h2 {
+  font-size: clamp(1.3rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.1rem, 3vw, 2rem);
+}
+
+h4, h5, h6 {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Links */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+a:active {
+  opacity: 0.8;
+}
+
+/* Buttons - Responsive Touch-Friendly */
+button {
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  padding: var(--button-padding);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-height: var(--touch-target-min);
+  touch-action: manipulation;
+}
+
+button:hover {
+  border-color: #646cff;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* Input Fields - Responsive */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 0.5em 0.8em;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+  transition: all 0.25s ease;
+  min-height: var(--touch-target-min);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #646cff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Images - Responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* SVG - Responsive */
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 107, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 107, 0.6);
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(255, 107, 107, 0.5);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(255, 107, 107, 0.5);
+  color: white;
+}
+
+/* Prevent layout shift */
+html {
+  overflow-y: scroll;
+}
+
+/* Mobile Keyboard Fix */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
